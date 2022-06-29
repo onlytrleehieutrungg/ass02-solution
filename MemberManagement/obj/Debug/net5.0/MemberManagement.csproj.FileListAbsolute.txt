@@ -1,0 +1,15 @@
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\bin\Debug\net5.0\MemberManagement.deps.json
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\bin\Debug\net5.0\MemberManagement.runtimeconfig.json
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\bin\Debug\net5.0\MemberManagement.runtimeconfig.dev.json
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\bin\Debug\net5.0\MemberManagement.dll
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\bin\Debug\net5.0\MemberManagement.pdb
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\obj\Debug\net5.0\MemberManagement.csproj.AssemblyReference.cache
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\obj\Debug\net5.0\MemberManagement.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\obj\Debug\net5.0\MemberManagement.AssemblyInfoInputs.cache
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\obj\Debug\net5.0\MemberManagement.AssemblyInfo.cs
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\obj\Debug\net5.0\MemberManagement.csproj.CoreCompileInputs.cache
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\obj\Debug\net5.0\MemberManagement.dll
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\obj\Debug\net5.0\refint\MemberManagement.dll
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\obj\Debug\net5.0\MemberManagement.pdb
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\obj\Debug\net5.0\MemberManagement.genruntimeconfig.cache
+C:\Users\lakho\source\repos\Winform_Trung\Ass02Solution\MemberManagement\obj\Debug\net5.0\ref\MemberManagement.dll
