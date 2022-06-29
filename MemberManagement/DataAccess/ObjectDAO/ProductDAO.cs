@@ -1,24 +1,23 @@
 ﻿using MemberManagement.Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MemberManagement.DataAccess.ObjectDAO
 {
-    public class MemberDAO
+    public class ProductDAO
     {
-
-        private MemberDAO()
+        private ProductDAO()
         {
+
         }
 
-        private static MemberDAO instance = null;
+        private static ProductDAO instance = null;
         private static readonly object instanceLock = new object();
 
-        public static MemberDAO Instance
+        public static ProductDAO Instance
         {
             get
             {
@@ -26,61 +25,58 @@ namespace MemberManagement.DataAccess.ObjectDAO
                 {
                     if (instance == null)
                     {
-                        instance = new MemberDAO();
+                        instance = new ProductDAO();
                     }
                     return instance;
                 }
             }
         }
 
-        public IEnumerable<Member> GetMemberList()
+
+        public IEnumerable<Product> GetProductList()
         {
-            var members = new List<Member>();
+            var products = new List<Product>();
             try
             {
                 using var context = new FStoreDBContext();
-                members = context.Members.ToList();
-
+                products = context.Products.ToList();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return members;
+            return products;
         }
 
-
-        public Member GetMemberById(int memberId)
+        public Product GetProductByID(int productId)
         {
-            Member member = null;
-
+            Product product = null;
             try
             {
                 using var context = new FStoreDBContext();
-                member = context.Members.SingleOrDefault(c => c.MemberId == memberId);
+                product = context.Products.SingleOrDefault(p => p.ProductId == productId);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-
-            return member;
+            return product;
         }
 
-        public void AddNew(Member member)
+        public void AddNew(Product product)
         {
             try
             {
-                Member mem = GetMemberById(member.MemberId);
-                if (mem == null)
+                Product pro = GetProductByID(product.ProductId);
+                if (pro == null)
                 {
                     using var context = new FStoreDBContext();
-                    context.Members.Add(mem);
+                    context.Products.Add(pro);
                     context.SaveChanges();
                 }
                 else
                 {
-                    throw new Exception("The mem does not already exist");
+                    throw new Exception("The pro does not already exist");
                 }
             }
             catch (Exception ex)
@@ -89,21 +85,21 @@ namespace MemberManagement.DataAccess.ObjectDAO
             }
 
         }
-        public void UpdateMember(Member member)
+
+        public void UpdateProduct(Product product)
         {
             try
             {
-                Member mem = GetMemberById(member.MemberId);
-               
-                if(mem != null)
+                Product pro = GetProductByID(product.ProductId);
+                if (pro != null)
                 {
                     using var context = new FStoreDBContext();
-                    context.Members.Update(mem);
+                    context.Products.Update(pro);
                     context.SaveChanges();
                 }
                 else
                 {
-                    throw new Exception("The Member does not already exist");
+                    throw new Exception("The pro does not already exist");
                 }
             }
             catch (Exception ex)
@@ -113,48 +109,26 @@ namespace MemberManagement.DataAccess.ObjectDAO
 
         }
 
-        public void RemoveMember(int memberId)
+        public void RemoveProduct(int productId)
         {
             try
             {
-                Member member = GetMemberById(memberId);
-                if (member != null)
+                Product pro = GetProductByID(productId);
+                if (pro != null)
                 {
                     using var context = new FStoreDBContext();
-                    context.Members.Remove(member);
-                    
+                    context.Products.Remove(pro);
                 }
                 else
                 {
                     throw new Exception("Member dose not already exists.");
+
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-
-        }
-
-
-        public Member Login(string email, string password)
-        {
-            IEnumerable<Member> members = GetMemberList();
-            Member member = members.SingleOrDefault(mb => mb.Email.Equals(email) && mb.Password.Equals(password));
-            return member;
-        }
-
-        public IEnumerable<Member> SearchMember(string id)
-        {
-            IEnumerable<Member> searchResult = null;
-            IEnumerable<Member> members = GetMemberList();
-
-            var memberSearch = from member in members
-                               where member.MemberId.Equals(id)
-                               select member;
-            searchResult = memberSearch;
-
-            return searchResult;
         }
     }
 }

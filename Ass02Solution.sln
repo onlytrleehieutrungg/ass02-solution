@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemberManagement", "MemberManagement\MemberManagement.csproj", "{3C46F357-E42A-4003-B336-283FEA386CD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemberManagement", "MemberManagement\MemberManagement.csproj", "{3C46F357-E42A-4003-B336-283FEA386CD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemberManagementApp", "MemberManagementApp\MemberManagementApp.csproj", "{2C6B5C68-EDE9-4666-9F48-F3F23F3DD682}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3C46F357-E42A-4003-B336-283FEA386CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C46F357-E42A-4003-B336-283FEA386CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C46F357-E42A-4003-B336-283FEA386CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C6B5C68-EDE9-4666-9F48-F3F23F3DD682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C6B5C68-EDE9-4666-9F48-F3F23F3DD682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C6B5C68-EDE9-4666-9F48-F3F23F3DD682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C6B5C68-EDE9-4666-9F48-F3F23F3DD682}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
