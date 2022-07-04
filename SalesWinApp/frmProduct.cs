@@ -111,7 +111,7 @@ namespace SalesWinApp
                 txtProductName.DataBindings.Add("Text", source, "ProductName");
                 txtWeight.DataBindings.Add("Text", source, "Weight");
                 txtUnitPrice.DataBindings.Add("Text", source, "UnitPrice");
-                txtUnitslnStock.DataBindings.Add("Text", source, "UnitslnStock");
+                txtUnitslnStock.DataBindings.Add("Text", source, "UnitsInStock");
 
                 dgvProduct.DataSource = null;
                 dgvProduct.DataSource = source;
@@ -136,7 +136,52 @@ namespace SalesWinApp
                 MessageBox.Show(ex.Message, "Load product list");
             }
         }
+        public void LoadProductList(IEnumerable<Product> products)
+        {
+            var adminDefaultSettings = Program.Configuration.GetSection("AdminAccount").Get<Member>();
+            string adminEmail = adminDefaultSettings.Email;
+            try
+            {
+                //txtPassword.Hide();
+                source = new BindingSource();
+                source.DataSource = products;
+                txtProductID.DataBindings.Clear();
+                txtCategory.DataBindings.Clear();
+                txtProductName.DataBindings.Clear();
+                txtWeight.DataBindings.Clear();
+                txtUnitPrice.DataBindings.Clear();
+                txtUnitslnStock.DataBindings.Clear();
 
+                txtProductID.DataBindings.Add("Text", source, "ProductID");
+                txtCategory.DataBindings.Add("Text", source, "Category");
+                txtProductName.DataBindings.Add("Text", source, "ProductName");
+                txtWeight.DataBindings.Add("Text", source, "Weight");
+                txtUnitPrice.DataBindings.Add("Text", source, "UnitPrice");
+                txtUnitslnStock.DataBindings.Add("Text", source, "UnitsInStock");
+
+                dgvProduct.DataSource = null;
+                dgvProduct.DataSource = source;
+                if (products.Count() == 0)
+                {
+                    ClearText();
+                    btnDelete.Enabled = false;
+                }
+                else if (LoginAccount.Email == adminEmail)
+                {
+                    btnDelete.Enabled = true;
+                    btnFilter.Enabled = true;
+                    btnUpdate.Enabled = true;
+                }
+                else
+                {
+                    btnFilter.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load product list");
+            }
+        }
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
             frmProductDetails f = new frmProductDetails
@@ -199,161 +244,36 @@ namespace SalesWinApp
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            //int filterProductID = int.Parse(txtProductID.Text);
-            //string filterProductName = txtProductName.Text;
+            var list = productRepository.GetProducts();
+            if (cbProductID.Checked == true)
+            {
+                int filterProductID = int.Parse(txtProductID.Text);
+                list = from product in list where product.ProductId == filterProductID select product;
+            }
+            if (cbProductName.Checked == true)
+            {
+                string filterProductName = txtProductName.Text;
+                list = from product in list where product.ProductName.ToLower().Contains(filterProductName.ToLower()) select product;
+
+            }
+            if (cbUnitPrice.Checked == true)
+            {
+                decimal filterUnitPriceStart = decimal.Parse(txtUnitPriceStart.Text);
+                decimal filterUnitPriceEnd = decimal.Parse(txtUnitPriceEnd.Text);
+                list = from product in list where product.UnitPrice >= filterUnitPriceStart && product.UnitPrice <= filterUnitPriceEnd select product;
 
 
-            //if (cbProductID.Checked == true)
-            //{
-            //    LoadProductList();
-            //    List<Product> filterID = new List<Product>();
-            //    for (int i = 0; i < dgvProduct.Rows.Count - 1; i++)
-            //    {
-            //        if (dgvProduct.Rows[i].Cells[0].Value.Equals(filterProductID))
-            //        {
-            //            //filterID.Add(listProduct[i]);
-            //        }
+            }
+            if (cbUnitslnStock.Checked == true)
+            {
+                int filterUnitslnStockStart = int.Parse(txtUnitslnStockStart.Text);
+                int filterUnitslnStockEnd = int.Parse(txtUnitslnStockEnd.Text);
+                list = from product in list where product.UnitsInStock >= filterUnitslnStockStart && product.UnitsInStock <= filterUnitslnStockEnd select product;
 
-            //    }
-            //    if (filterID.Count > 0)
-            //    {
-            //        source = new BindingSource();
-            //        source.DataSource = filterID;
-            //        txtProductID.DataBindings.Clear();
-            //        txtCategory.DataBindings.Clear();
-            //        txtProductName.DataBindings.Clear();
-            //        txtWeight.DataBindings.Clear();
-            //        txtUnitPrice.DataBindings.Clear();
-            //        txtUnitslnStock.DataBindings.Clear();
-
-            //        txtProductID.DataBindings.Add("Text", source, "ProductID");
-            //        txtCategory.DataBindings.Add("Text", source, "Category");
-            //        txtProductName.DataBindings.Add("Text", source, "ProductName");
-            //        txtWeight.DataBindings.Add("Text", source, "Weight");
-            //        txtUnitPrice.DataBindings.Add("Text", source, "UnitPrice");
-            //        txtUnitslnStock.DataBindings.Add("Text", source, "UnitslnStock");
-
-            //        dgvProduct.DataSource = null;
-            //        dgvProduct.DataSource = filterID;
-            //    }
-            //    else
-            //    {
-            //        dgvProduct.DataSource = null;
-            //        dgvProduct.DataSource = source;
-            //    }
-            //}
-            //else if (cbProductName.Checked == true)
-            //{
-            //    LoadProductList();
-            //    List<Product> filterName = new List<Product>();
-            //    for (int i = 0; i < dgvProduct.Rows.Count - 1; i++)
-            //    {
-            //        if (dgvProduct.Rows[i].Cells[2].Value.ToString().ToLower().Contains(filterProductName.ToLower()))
-            //        {
-            //            //filterName.Add(listProduct[i]);
-            //        }
-
-            //    }
-            //    if (filterName.Count > 0)
-            //    {
-            //        source = new BindingSource();
-            //        source.DataSource = filterName;
-            //        txtProductID.DataBindings.Clear();
-            //        txtCategory.DataBindings.Clear();
-            //        txtProductName.DataBindings.Clear();
-            //        txtWeight.DataBindings.Clear();
-            //        txtUnitPrice.DataBindings.Clear();
-            //        txtUnitslnStock.DataBindings.Clear();
-
-            //        txtProductID.DataBindings.Add("Text", source, "ProductID");
-            //        txtCategory.DataBindings.Add("Text", source, "Category");
-            //        txtProductName.DataBindings.Add("Text", source, "ProductName");
-            //        txtWeight.DataBindings.Add("Text", source, "Weight");
-            //        txtUnitPrice.DataBindings.Add("Text", source, "UnitPrice");
-            //        txtUnitslnStock.DataBindings.Add("Text", source, "UnitslnStock");
-
-            //        dgvProduct.DataSource = null;
-            //        dgvProduct.DataSource = filterName;
-            //    }
-            //    else
-            //    {
-            //        dgvProduct.DataSource = null;
-            //        dgvProduct.DataSource = source;
-            //    }
-            //}
-            //else if (cbUnitPrice.Checked == true)
-            //{
-            //    decimal filterUnitPriceStart = decimal.Parse(txtUnitPriceStart.Text);
-            //    decimal filterUnitPriceEnd = decimal.Parse(txtUnitPriceEnd.Text);
-            //    LoadProductList();
-            //    List<Product> filterByUnitPrice = new ProductRepository().GetProductByUnitPrice(filterUnitPriceStart, filterUnitPriceEnd);
-
-            //    listProduct = filterByUnitPrice;
-            //    if (filterByUnitPrice.Count > 0)
-            //    {
-            //        source = new BindingSource();
-            //        source.DataSource = filterByUnitPrice;
-            //        txtProductID.DataBindings.Clear();
-            //        txtCategory.DataBindings.Clear();
-            //        txtProductName.DataBindings.Clear();
-            //        txtWeight.DataBindings.Clear();
-            //        txtUnitPrice.DataBindings.Clear();
-            //        txtUnitslnStock.DataBindings.Clear();
-
-            //        txtProductID.DataBindings.Add("Text", source, "ProductID");
-            //        txtCategory.DataBindings.Add("Text", source, "Category");
-            //        txtProductName.DataBindings.Add("Text", source, "ProductName");
-            //        txtWeight.DataBindings.Add("Text", source, "Weight");
-            //        txtUnitPrice.DataBindings.Add("Text", source, "UnitPrice");
-            //        txtUnitslnStock.DataBindings.Add("Text", source, "UnitslnStock");
-
-            //        dgvProduct.DataSource = null;
-            //        dgvProduct.DataSource = filterByUnitPrice;
-            //    }
-            //    else
-            //    {
-            //        dgvProduct.DataSource = null;
-            //        dgvProduct.DataSource = source;
-            //    }
-            //}
-            //else if (cbUnitslnStock.Checked == true)
-            //{
-            //    int filterUnitslnStockStart = int.Parse(txtUnitslnStockStart.Text);
-            //    int filterUnitslnStockEnd = int.Parse(txtUnitslnStockEnd.Text);
-            //    LoadProductList();
-            //    List<ProductObject> filterByUnitStock = new ProductRepository().GetProductByUnitStock(filterUnitslnStockStart, filterUnitslnStockEnd);
-            //    listProduct = filterByUnitStock;
-            //    if (filterByUnitStock.Count > 0)
-            //    {
-            //        source = new BindingSource();
-            //        source.DataSource = filterByUnitStock;
-            //        txtProductID.DataBindings.Clear();
-            //        txtCategory.DataBindings.Clear();
-            //        txtProductName.DataBindings.Clear();
-            //        txtWeight.DataBindings.Clear();
-            //        txtUnitPrice.DataBindings.Clear();
-            //        txtUnitslnStock.DataBindings.Clear();
-
-            //        txtProductID.DataBindings.Add("Text", source, "ProductID");
-            //        txtCategory.DataBindings.Add("Text", source, "Category");
-            //        txtProductName.DataBindings.Add("Text", source, "ProductName");
-            //        txtWeight.DataBindings.Add("Text", source, "Weight");
-            //        txtUnitPrice.DataBindings.Add("Text", source, "UnitPrice");
-            //        txtUnitslnStock.DataBindings.Add("Text", source, "UnitslnStock");
-
-            //        dgvProduct.DataSource = null;
-            //        dgvProduct.DataSource = filterByUnitStock;
-            //    }
-            //    else
-            //    {
-            //        dgvProduct.DataSource = null;
-            //        dgvProduct.DataSource = source;
-            //    }
-            //}
-            //else
-            //{
-            //    LoadProductList();
-            //}
+            }
+            LoadProductList(list);
         }
+
+
     }
 }

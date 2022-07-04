@@ -6000,19 +6000,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lakho\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lakho\\source\\repos\\Winform_Trung\\Ass02Solution\\MemberManagement\\MemberManagement.csproj",
+      "projectUniqueName": "D:\\study\\prn221\\ass02-solution\\MemberManagement\\MemberManagement.csproj",
       "projectName": "MemberManagement",
-      "projectPath": "C:\\Users\\lakho\\source\\repos\\Winform_Trung\\Ass02Solution\\MemberManagement\\MemberManagement.csproj",
-      "packagesPath": "C:\\Users\\lakho\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lakho\\source\\repos\\Winform_Trung\\Ass02Solution\\MemberManagement\\obj\\",
+      "projectPath": "D:\\study\\prn221\\ass02-solution\\MemberManagement\\MemberManagement.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\study\\prn221\\ass02-solution\\MemberManagement\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\lakho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
