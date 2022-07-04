@@ -93,7 +93,7 @@ namespace MemberManagement.DataAccess.ObjectDAO
                 if (ord != null)
                 {
                     using var context = new FStoreDBContext();
-                    context.Orders.Update(ord);
+                    context.Orders.Update(order);
                     context.SaveChanges();
                 }
                 else
@@ -126,7 +126,6 @@ namespace MemberManagement.DataAccess.ObjectDAO
             {
                 throw new Exception(ex.Message);
             }
-
         }
     }
 }

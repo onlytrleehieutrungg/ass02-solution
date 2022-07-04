@@ -16,6 +16,7 @@ namespace MemberManagement.DataAccess.Repository
 
         public Member GetMemberById(int memberId) => MemberDAO.Instance.GetMemberById(memberId);
 
+        public List<Member> GetList() => MemberDAO.Instance.GetList();
         public IEnumerable<Member> GetMemebers() => MemberDAO.Instance.GetMemberList();
 
         public Member Login(string username, string password) => MemberDAO.Instance.Login(username, password);

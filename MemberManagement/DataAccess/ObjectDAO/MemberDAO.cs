@@ -50,6 +50,24 @@ namespace MemberManagement.DataAccess.ObjectDAO
         }
 
 
+        public List<Member> GetList()
+        {
+            var members = new List<Member>();
+            try
+            {
+                using var context = new FStoreDBContext();
+                members = context.Members.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return members;
+        }
+
+
+
         public Member GetMemberById(int memberId)
         {
             Member member = null;
@@ -75,7 +93,7 @@ namespace MemberManagement.DataAccess.ObjectDAO
                 if (mem == null)
                 {
                     using var context = new FStoreDBContext();
-                    context.Members.Add(mem);
+                    context.Members.Add(member);
                     context.SaveChanges();
                 }
                 else

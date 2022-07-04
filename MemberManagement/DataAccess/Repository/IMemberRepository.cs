@@ -10,6 +10,7 @@ namespace MemberManagement.DataAccess.Repository
     public interface IMemberRepository
     {
         public IEnumerable<Member> GetMemebers();
+        public List<Member> GetList();
         Member GetMemberById(int memberId);
         void AddMember(Member member);
         void DeleteMember(int memberId);
